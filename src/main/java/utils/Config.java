@@ -14,6 +14,8 @@ import java.util.LinkedList;
  * Keys in configuration files must start from symbols fulfilling conditions
  * "[a-zA-Z]+" ,rest is treated as comments.
  * <p>
+ * WARNING: Kewys are case INSENSITIVE.
+ * <p>
  * You can only have ONE instance of this class for retaining Configuration file
  * integrity.
  *
@@ -53,7 +55,8 @@ public class Config {
     }
 
     /**
-     * Used for getting LinkedList containing names of all Keys of settings in config.file
+     * Used for getting LinkedList containing names of all Keys of settings in
+     * config.file
      *
      * @return LinkedList containing names (String) of all Keys
      */
@@ -68,12 +71,9 @@ public class Config {
      * @return Returns value (String) contained under provided Key (String)
      */
     public static String getKey(String key) {
-        return settingsMap.get(key);
+        return settingsMap.get(key.toLowerCase());
     }
 
-    /**
-     * Used for building HashMap containing value contained under Keys.
-     */
     private static HashMap<String, String> load() {
         HashMap<String, String> tmpMap = new HashMap<>();
         // Read config file
@@ -81,6 +81,10 @@ public class Config {
         // Convert config file to HashMap
         tmpList.stream().map((item) -> item.split("=")).forEachOrdered((tmpArray) -> {
             if (regex.contains(String.valueOf(tmpArray[0].charAt(0)), "[a-zA-Z]+")) {
+                // Trim
+                tmpArray[0] = tmpArray[0].trim();
+                tmpArray[0] = tmpArray[0].toLowerCase();
+                tmpArray[1] = tmpArray[1].trim();
                 tmpMap.put(tmpArray[0], tmpArray[1]);
             }
         });
