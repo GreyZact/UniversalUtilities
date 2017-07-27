@@ -187,7 +187,7 @@ public class FileExplorer {
                 tmpLinkedList.add(sCurrentLine);
             }
         } catch (FileNotFoundException ex) {
-            debug.log("read> " + PATH + input + " > ERROR");
+            debug.log("read: " + PATH + input + " : ERROR");
             Logger.getLogger(FileExplorer.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
             debug.log("read: " + PATH + input + " : ERROR");
@@ -269,7 +269,7 @@ public class FileExplorer {
      * directory.
      */
     public LinkedList<String> ls(String directory) {
-        LinkedList<String> tmpList = new LinkedList<String>();
+        LinkedList<String> tmpList = new LinkedList<>();
         File folder = new File(PATH + directory);
         File[] listOfFiles = folder.listFiles();
 
@@ -294,7 +294,7 @@ public class FileExplorer {
      * @return LinkedList containing names (String) of files in directory.
      */
     public LinkedList<String> lsFiles(String directory) {
-        LinkedList<String> tmpList = new LinkedList<String>();
+        LinkedList<String> tmpList = new LinkedList<>();
         File folder = new File(PATH + directory);
         File[] listOfFiles = folder.listFiles();
 
